@@ -1,13 +1,15 @@
-import { countries } from "./countries.mjs";
-import { countriesCardTemplate, countriesNotAvaibleTextEl, countriesRegionSelectEl, countriesSearchInputEl, countriesWrapperBoxEl, themeTogglerButtonEl } from "./htmlElements.mjs";
+import { getCountries, getFilteredCountries } from "./countries.mjs";
+import { countriesCardTemplate,countriesNotAvaibleIconEl , countriesNotAvaibleTextEl, countriesRegionSelectEl, countriesSearchInputEl, countriesWrapperBoxEl, loaderSectionEl, themeTogglerButtonEl, countriesFiltersSectionEl } from "./htmlElements.mjs";
 import { chooseTheme, toggleTheme } from "./themeController.mjs";
 
 chooseTheme();
-
 themeTogglerButtonEl.addEventListener("click",toggleTheme);
 
 const writeUi = (countries) => {
+    loaderSectionEl.classList.add("hidden");
+    countriesFiltersSectionEl.classList.remove("hidden");
     if(Array.isArray(countries) && countries.length !== 0) {
+        countriesNotAvaibleIconEl.classList.add("hidden");
         countriesNotAvaibleTextEl.classList.add("hidden");
         countriesWrapperBoxEl.innerHTML = null;
         countries.forEach(country=>{
@@ -22,29 +24,13 @@ const writeUi = (countries) => {
         });
     }  else {
         countriesWrapperBoxEl.innerHTML = null;
+        countriesNotAvaibleIconEl.classList.remove("hidden");
         countriesNotAvaibleTextEl.classList.remove("hidden");
     }
 }
 
-writeUi(countries);
+writeUi(await getCountries());
 
-const filterCountries = (text="", region="all") => {
-    if(Array.isArray(countries)) {
-        if(text === "" && region === "all") {
-            writeUi(countries);
-        } else if (text === "" && region !== "all" ) {
-            const filteredCountries = countries.filter((country)=>country.region.toLowerCase() === region);
-            writeUi(filteredCountries);
-        } else if(text !== "" && region === "all") {
-            const filteredCountries = countries.filter((country)=> country.name.toLowerCase().includes(text.toLowerCase()));
-            writeUi(filteredCountries);
-        } else {
-            const filteredCountries = countries.filter((country)=> country.name.toLowerCase().includes(text.toLowerCase()) && country.region.toLowerCase() === region);
-            writeUi(filteredCountries);
-        }
-    }
-}
+countriesSearchInputEl.addEventListener("input",async (e)=> writeUi(await getFilteredCountries(e.target.value,countriesRegionSelectEl.value)));
 
-countriesSearchInputEl.addEventListener("input",(e)=>filterCountries(e.target.value,countriesRegionSelectEl.value));
-
-countriesRegionSelectEl.addEventListener("input",(e)=>filterCountries(countriesSearchInputEl.value,e.target.value));
+countriesRegionSelectEl.addEventListener("input",async (e)=> writeUi(await getFilteredCountries(countriesSearchInputEl.value,e.target.value)));

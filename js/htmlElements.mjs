@@ -1,7 +1,10 @@
 export const htmlEl = document.firstElementChild;
 export const themeTogglerButtonEl = document.querySelector(".theme-toggler-button");
+export const loaderSectionEl = document.querySelector(".loader-section");
+export const countriesFiltersSectionEl = document.querySelector(".countries-filters-section");
 export const countriesSearchInputEl  = document.querySelector("#countries-search-input");
 export const countriesRegionSelectEl  = document.querySelector("#countries-filter-select");
+export const countriesNotAvaibleIconEl = document.querySelector(".countries-filter-empty-icon");
 export const countriesNotAvaibleTextEl = document.querySelector(".countries-filter-empty-text");
 export const countriesWrapperBoxEl = document.querySelector(".countries-container");
 export const countriesCardTemplate = document.querySelector("#countries-card-template");
