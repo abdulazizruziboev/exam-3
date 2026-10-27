@@ -16,6 +16,10 @@ const writeUi = (countries) => {
             const card = countriesCardTemplate.cloneNode(true).content;
             const flag = card.querySelector("img");
             flag.src = country?.flag;
+            flag.alt = country?.name ?? "N/A";
+            flag.addEventListener("error",()=>{
+                flag.src="/images/images_fallback.png" 
+            })
             card.querySelector(".country-title").textContent = country?.name ?? "N/A";
             card.querySelector(".card-population-text").textContent = country?.population.toLocaleString() ?? "N/A";
             card.querySelector(".card-region-text").textContent = country?.region ?? "N/A";

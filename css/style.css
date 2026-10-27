@@ -286,6 +286,8 @@ main {
         height: 160px;
         object-position: center center;
         object-fit: cover;
+        background: var(--main-body-background-color);
+        border-bottom: 1px solid var(--main-shadow-color);
     }
 }
 
