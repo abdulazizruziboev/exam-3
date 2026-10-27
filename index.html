@@ -1,16 +1,88 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"class="" >
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Countries</title>
+    <link rel="stylesheet" href="/css/style.css">
 </head>
-<body>
+<body >
 
-    <div>
+    <header>
 
-    </div>
+        <div class="container header-container">
+
+            <a href="/" class="header-logo-link">
+                Where in the world?
+            </a>
+
+
+            <button class="theme-toggler-button">
+
+                <img src="/images/icons/icon-moon-black.svg" alt="Moon icon">
+
+                <span>
+                    Dark Mode
+                </span>
+
+            </button>
+
+        </div>
+
+    </header>
     
-    <script src="/js/index.js" type="module" defer></script>
+    <main>
+
+        <section class="countries-filters-section">
+
+            <div class="container countries-filters-container">
+
+                <label for="countries-search-input" class="countries-search-box">
+                    <div class="countries-search-icon"></div>
+                    <input type="search" class="countries-search-input" id="countries-search-input" placeholder="Search a country...">
+                </label>
+
+                <label for="countries-filter-select" class="countries-filter-select-box">
+                    <select id="countries-filter-select" class="countries-filter-select">
+                        <option value="all" selected>Filter by Region</option>
+                        <option value="africa">Africa</option>
+                        <option value="americas">America</option>
+                        <option value="asia">Asia</option>
+                        <option value="europe">Europe</option>
+                        <option value="oceania">Oceania</option>
+                    </select>
+                </label>
+
+            </div>
+
+        </section>
+
+        <section class="countries-section">
+            
+            <h2 class="countries-filter-empty-text hidden">Results not avaible</h2>
+
+            <div class="container countries-container"></div>
+
+        </section>
+    </main>
+
+    <template id="countries-card-template">
+        <article class="country-card">
+            <img src="/images/flags/flag-germany.svg" alt="">
+            <div class="country-body">
+                <h2 class="country-title">
+                    Germany
+                </h2>
+                
+                <div class="country-about-box">
+                    <p>Population: <span class="card-population-text">81,770,900</span></p>
+                    <p>Region: <span class="card-region-text">Europe</span></p>
+                    <p>Capital: <span class="card-capital-text">Berlin</span></p>
+                </div>
+
+            </div>
+        </article>
+    </template>
+    <script src="/js/index.mjs" type="module" defer></script>
 </body>
 </html>
